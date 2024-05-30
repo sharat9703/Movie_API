@@ -26,7 +26,7 @@ const addMovie = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-const updateMovie = async (req, res) => {
+const updateMovieByName = async (req, res) => {
   try {
     const {name} = req.params;
     const mov = await Movie.findOne({name:name});
@@ -49,6 +49,19 @@ const updateMovie = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+const updateMovieById = async (req,res)=>{
+    try{
+        const {id} = req.params;
+        const movie = await Movie.findByIdAndUpdate(id);
+        if(!movie){
+            return res.status(404).json({ message: "Movie not found" });
+        }
+        const updatedMovie = await Movie.findById(id);
+        res.status(200).json(updatedMovie);
+    }catch(err){
+        res.status(500).json({ message: err.message });
+    }
+}
 
 const deleteMovie = async (req, res) => {
   try {
@@ -61,4 +74,4 @@ const deleteMovie = async (req, res) => {
   }
 };
 
-module.exports = { getMovies, getMovie, addMovie, updateMovie, deleteMovie };
+module.exports = { getMovies, getMovie, addMovie, updateMovieByName,updateMovieById, deleteMovie };
