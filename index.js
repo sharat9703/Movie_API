@@ -3,12 +3,13 @@ const mongoose = require("mongoose");
 
 const movieRoute = require("./routes/movie.routes.js");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(cors);
 // parse application/json
 app.use(bodyParser.json())
 
