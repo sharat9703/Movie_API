@@ -1,9 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const dotenv = require("dotenv");
+dotenv.config();
 const movieRoute = require("./routes/movie.routes.js");
 const bodyParser = require("body-parser");
-
+const URL = process.env.URL;
 const app = express();
 //middlewares
 app.use(express.json());
@@ -20,9 +21,7 @@ app.listen(3000, () => {
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://Sharat:sharatspass@sandbox1.ggiggrb.mongodb.net/Movies_API?retryWrites=true&w=majority&appName=Sandbox1"
-  )
+  .connect(URL)
   .then(() => {
     console.log("database is connected!");
     app.get("/", (req, res) => {

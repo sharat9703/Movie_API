@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const {getMovies,getMovie,addMovie, deleteMovie, updateMovieById, updateMovieByName} = require("../controllers/movie.controller.js");
+const {methods} = require("../controllers/movie.controller.js");
 
 
 // GET API  --find all the existing movies
-router.get("/", getMovies);
+router.get("/", methods.getMovies);
 
-router.get("/:id", getMovie);
-
+router.get("/:id", methods.getMovie);
+    
 //Post API
-router.post("/", addMovie);
+router.post("/", methods.addMovie);
 
 //PUT API
-router.put("/:name", updateMovieByName);
-router.put("/id/:id", updateMovieById)
+router.put("/:name", methods.updateMovieByName);
+router.put("/id/:id", methods.updateMovieById);
 //DELETE API
-router.delete("/:id", deleteMovie);
+router.delete("/:id", methods.deleteMovie);
 
 module.exports = router;
